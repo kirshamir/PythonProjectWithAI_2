@@ -1,0 +1,30 @@
+<html>
+<head><title>Tic-Tac-Toe Web</title></head>
+<body>
+    <h2>Tic-Tac-Toe (Web)</h2>
+    {% if message %}
+        <h3>{{ message }}</h3>
+    {% else %}
+        <h3>Player {{ current_player }}'s turn</h3>
+    {% endif %}
+    <table style="font-size:2em;">
+        {% for i in range(3) %}
+        <tr>
+            {% for j in range(3) %}
+            <td style="width:60px;height:60px;text-align:center;border:1px solid #000;">
+                {% set idx = i*3+j %}
+                {% if board[idx] == ' ' and not message %}
+                    <a href="{{ url_for('move', idx=idx) }}">&nbsp;&nbsp;&nbsp;</a>
+                {% else %}
+                    {{ board[idx] }}
+                {% endif %}
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="{{ url_for('reset') }}">Restart Game</a>
+</body>
+</html>
+
